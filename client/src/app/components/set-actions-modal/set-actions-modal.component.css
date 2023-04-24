@@ -1,0 +1,15 @@
+.dialog-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}

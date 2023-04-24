@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>Start Review</h2>
+
+<mat-dialog-content>
+    <p>
+        You have 5 seconds to test your understanding of the topic on the flashcard
+            before it flips to show the answer.
+    </p>
+    <p>
+        Click on 'Correct' or 'Incorrect' to tally your score.
+    </p>
+
+</mat-dialog-content>
+
+<mat-dialog-actions class="buttons">
+    <button mat-raised-button (click)="close()">Cancel</button>
+    <button mat-raised-button mat-primary (click)="goToReview()">Start Review</button>
+</mat-dialog-actions>

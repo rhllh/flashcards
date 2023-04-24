@@ -1,0 +1,83 @@
+<mat-toolbar>
+  <span>Flashcards</span>
+  <span class="spacer"></span>
+  <button mat-icon-button
+      matTooltip="Profile" [routerLink]="['/landing']" [disabled]="!isUserLoggedIn">
+    <mat-icon>person</mat-icon>
+  </button>
+  <button mat-icon-button
+      matTooltip="Log Out" type="button" (click)="logout()" [disabled]="!isUserLoggedIn">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<br>
+
+<div class="header">
+  <form [formGroup]="editSetFormGroup" (ngSubmit)="save()">
+    <div class="editset-buttons">
+      <button mat-raised-button color="primary" type="button" (click)="deleteSetDialog()">Delete Set</button>
+      <button mat-raised-button color="primary" type="submit">Save Set</button>
+    </div>
+    
+    <br>
+  
+    <mat-grid-list cols="2" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+      
+      <mat-grid-tile>
+        <h3>Card Count: {{cardCount}}</h3>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+
+<br>
+
+<div class="parent">
+  <ng-template [ngIf]="cards.length == 0">
+    <button mat-icon-button (click)="createCardDialog()" matTooltip="Create a Card">
+      <mat-icon>add</mat-icon>
+    </button>
+  </ng-template>
+  <ng-template [ngIf]="cards.length > 0">
+    <div *ngFor="let i of cards" class="row">
+      <div class="col">
+        <mat-card class="card">
+          <mat-card-header class="spacer">
+            <mat-card-title>
+              {{i.presented}}
+            </mat-card-title>
+            <img mat-card-sm-image src="{{i.imageFile}}" alt="{{i.imageFile}}" *ngIf="i.imageFile != 'nil'">
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{i.hidden}}</p>
+            <mat-divider></mat-divider>
+          </mat-card-content> 
+          <mat-card-actions>
+            <button mat-button (click)="editCardDialog(i)">EDIT</button>
+            <button mat-button (click)="deleteCardDialog(i)">DELETE</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div class="add-button">
+      <button mat-icon-button primary (click)="createCardDialog()" matTooltip="Create a Card">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    
+  </ng-template>
+</div>

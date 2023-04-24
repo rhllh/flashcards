@@ -1,0 +1,46 @@
+<mat-toolbar>
+  <span>Flashcards</span>
+  <span class="spacer"></span>
+  <button mat-icon-button
+    matTooltip="Profile" [routerLink]="['/landing']" [disabled]="!isUserLoggedIn">
+    <mat-icon>person</mat-icon>
+  </button>
+  <button mat-icon-button
+    matTooltip="Log Out" (click)="logout()" [disabled]="!isUserLoggedIn">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<br>
+
+<div class="create-button">
+  <button mat-raised-button color="primary" (click)="openCreateDialog()">Create New Set</button>
+</div>
+
+<div class="content">
+  <ng-template [ngIf]="cardSets.length == 0">
+    <p>No sets yet</p>
+  </ng-template>
+  <ng-template [ngIf]="cardSets.length > 0">
+    <div *ngFor="let i of cardSets" class="row">
+      <div class="col">
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-subtitle>#{{i.id}}</mat-card-subtitle>
+            <mat-card-title>{{i.title}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{i.description}}</p>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button type="button" (click)="viewSet(i)">VIEW</button>
+            <button mat-button type="button" (click)="editSet(i)">EDIT</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
+

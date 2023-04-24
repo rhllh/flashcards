@@ -1,0 +1,35 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.card {
+    display: flex;
+    width: 300px;
+}
+
+mat-form-field {
+    height: 100%;
+    width: 80%;
+}
+
+.parent {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px 50px;
+    margin: 20px;
+    align-items: stretch;
+}
+
+.editset-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 70px;
+    flex-wrap: wrap;
+}
+
+.add-button {
+    display: flex;
+    align-items: center;
+}

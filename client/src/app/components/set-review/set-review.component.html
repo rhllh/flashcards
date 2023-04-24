@@ -1,0 +1,42 @@
+<mat-toolbar>
+  <span>Flashcards</span>
+  <span class="spacer"></span>
+  <button mat-icon-button
+      matTooltip="Profile" [routerLink]="['/landing']" [disabled]="!isUserLoggedIn">
+    <mat-icon>person</mat-icon>
+  </button>
+  <button mat-icon-button
+      matTooltip="Log Out" type="button" (click)="logout()" [disabled]="!isUserLoggedIn">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="review-stepper">
+  <mat-stepper #stepper>
+    <mat-step *ngFor="let c of cardsToReview; let i = index">
+      <div class="tp-wrapper">
+        <div class="tp-box" (click)="toggleFlip()" [@flipState]="flip">
+          <div class="tp-box__side tp-box__front">
+            <div class="card-text">
+              <h2>{{c.presented}}</h2>
+            </div>
+          </div>
+          <div class="tp-box__side tp-box__back">
+            <div class="card-text">
+              <h4>{{c.hidden}}</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="next-button" *ngIf="i != cardsToReview.length-1">
+        <button mat-button matStepperNext color="primary" (click)="incorrect(i)" [disabled]="flip == 'inactive'">Incorrect</button>
+        <button mat-button matStepperNext color="primary" (click)="correct(i)" [disabled]="flip == 'inactive'">Correct</button>
+      </div>
+      <div class="complete-button" *ngIf="i == cardsToReview.length-1">
+        <button mat-button matStepperNext color="primary" (click)="incorrect(i)" [disabled]="flip == 'inactive'">Incorrect</button>
+        <button mat-button matStepperNext color="primary" (click)="correct(i)" [disabled]="flip == 'inactive'">Correct</button>
+        <button mat-button color="primary" type="button" (click)="openEndReviewDialog()" [disabled]="flip == 'inactive'">Complete</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</div>

@@ -1,0 +1,82 @@
+<div class="navbar">
+  <mat-toolbar>
+    <span>Flashcards</span>
+    <span class="spacer"></span>
+    <button mat-icon-button
+        matTooltip="Profile" [routerLink]="['/landing']" [disabled]="!isUserLoggedIn">
+      <mat-icon>person</mat-icon>
+    </button>
+    <button mat-icon-button
+        matTooltip="Log Out" type="button" (click)="logout()" [disabled]="!isUserLoggedIn">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+</div>
+
+<br>
+
+<div class="content">
+  <mat-tab-group>
+    <mat-tab label="Log In">
+    <div class="login-form">
+      <form [formGroup]="loginFormGroup" (ngSubmit)="login()">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your username</mat-label>
+          <input matInput formControlName="username" required>
+        </mat-form-field>
+  
+        <br>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <br>
+  
+        <button mat-raised-button mat-primary type="submit" [disabled]="loginFormGroup.invalid">Log In</button>
+      </form>
+    </div>
+    </mat-tab>
+
+    <mat-tab label="Sign Up">
+    <div class="signup-form">
+      <form [formGroup]="signupFormGroup" (ngSubmit)="signup()">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input matInput formControlName="email" required>
+          <mat-hint>Enter a valid email</mat-hint>
+        </mat-form-field>
+  
+        <br>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your username</mat-label>
+          <input matInput formControlName="username" required>
+        </mat-form-field>
+  
+        <br>
+        
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+          <mat-hint>At least 8 characters</mat-hint>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+  
+        <br>
+  
+        <button mat-raised-button mat-primary type="submit" [disabled]="signupFormGroup.invalid">Sign Up</button>
+      </form>
+        
+    </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+

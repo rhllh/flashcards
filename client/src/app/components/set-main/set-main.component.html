@@ -1,0 +1,75 @@
+<mat-toolbar>
+  <span>Flashcards</span>
+  <span class="spacer"></span>
+  <button mat-icon-button
+      matTooltip="Profile" [routerLink]="['/landing']" [disabled]="!isUserLoggedIn">
+    <mat-icon>person</mat-icon>
+  </button>
+  <button mat-icon-button
+      matTooltip="Log Out" type="button" (click)="logout()" [disabled]="!isUserLoggedIn">
+    <mat-icon>logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<div class="header">
+  <h1>{{title}}</h1>
+  <br>
+
+  <mat-grid-list cols="2" rowHeight="50px">
+    <mat-grid-tile>
+      <h3>{{description}}</h3>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <h4 *ngIf="lastReview != ''"><strong>Reviewed:</strong> {{lastReview}}</h4>
+      <h4 *ngIf="lastReview == ''"><strong>Reviewed:</strong> Never</h4>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <h3><strong>Card Count:</strong> {{cardCount}}</h3>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <h4 *ngIf="lastReview != ''"><strong>Score:</strong> {{lastReviewScore}} %</h4>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <br>
+</div>
+
+<div class="actions-form">
+  <button mat-raised-button color="primary" [routerLink]="['/set/', setId, 'edit']">Edit Set</button>
+
+  <form [formGroup]="reviewFormGroup" (ngSubmit)="openStartReviewDialog()">
+    <mat-form-field appearance="fill" class="review-form-field">
+      <mat-label>Cards to review</mat-label>
+      <mat-select formControlName="numCardsToReview">
+        <mat-option *ngFor="let i of numCardsToReviewOpt" [value]="i">{{i}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="cards.length == 0">Review</button>
+  </form>
+</div>
+
+<div class="parent">
+  <ng-template [ngIf]="cards.length == 0">
+    <p>No cards in this set yet. Edit set to add new cards.</p>
+  </ng-template>
+  <ng-template [ngIf]="cards.length > 0">
+    <div *ngFor="let i of cards" class="row">
+      <div class="col">
+        <mat-card class="card">
+          <mat-card-header class="spacer">
+            <mat-card-title>
+              {{i.presented}}
+            </mat-card-title>
+            <img mat-card-sm-image src="{{i.imageFile}}" alt="{{i.imageFile}}" *ngIf="i.imageFile != 'nil'">
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{i.hidden}}</p>
+          </mat-card-content> 
+        </mat-card>
+      </div>
+    </div>
+  </ng-template>
+</div>
+
