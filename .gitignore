@@ -1,7 +1,2 @@
 .DS_Store
 .vscode
-
-# Sensitive
-/client/**/assets/environments
-/client/**/firebase-messaging-sw.js
-/server/**/resources/**/static

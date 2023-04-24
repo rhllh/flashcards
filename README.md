@@ -1,5 +1,7 @@
 # flashcards
 
+Make your own set of flashcards for studying and reviewing. Built with Angular and Java Spring Boot.
+
 ## deployment
 
 Deployed to [Railway](https://rhllh-flashcards.up.railway.app).
