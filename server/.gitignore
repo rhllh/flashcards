@@ -3,8 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-!**/src/main/**/resources/assets/environments/
-!**/src/main/**/resources/assets/firebase-messaging-sw.js
 
 ### STS ###
 .apt_generated
